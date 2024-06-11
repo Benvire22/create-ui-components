@@ -1,5 +1,5 @@
 import React from 'react';
-import {Button} from '../../types/types';
+import { Button } from '../../types/types';
 
 interface Props extends React.PropsWithChildren {
   show: boolean;

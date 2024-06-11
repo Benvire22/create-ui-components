@@ -1,7 +1,7 @@
-import {useState} from 'react';
+import { useState } from 'react';
 import Modal from './components/Modal/Modal';
 import Alert from './components/Alert/Alert';
-import {Button} from './types/types';
+import { Button } from './types/types';
 import "./App.css";
 
 const App = () => {
@@ -16,16 +16,16 @@ const App = () => {
   ];
 
   return (
-    <div className="App container-xxl px-5 pb-5">
-      <button type="button" className="btn btn-primary mb-3" onClick={() => setShowModal(true)}>show Modal</button>
+    <div className="App container-xxl px-5">
+      <button type="button" className="btn btn-primary mb-3" onClick={() => setShowModal(true)}>Show Modal</button>
       <Modal
         show={showModal}
-        title="Some kinda modal title"
+        title="This is Modal title"
         onClose={() => setShowModal(false)}
         buttons={buttons}
       >
         <div className="modal-body">
-          <p>This is modal content</p>
+          <p>And this is a modal content</p>
         </div>
       </Modal>
       <Alert
@@ -35,7 +35,7 @@ const App = () => {
           setShowFirstAlert(false);
         }}
       >
-        This is warning on dismiss alert!
+        This is a warning on dismiss alert!
       </Alert>
       <Alert
         type="success"
@@ -43,9 +43,9 @@ const App = () => {
         onDismiss={() => setShowSecondAlert(false)}
         clickDismissable
       >
-        This is success click dismissible alert!
+        This is a success click dismissible alert!
       </Alert>
-      <Alert show={showThirdAlert} type="danger">This is don't closing danger alert!</Alert>
+      <Alert show={showThirdAlert} type="danger">This is a danger don't closing alert!</Alert>
     </div>
   );
 };
