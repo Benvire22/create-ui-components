@@ -1,6 +1,8 @@
-import {useState} from "react";
-import Modal from "./components/Modal/Modal";
-import Alert from "./components/Alert/Alert";
+import {useState} from 'react';
+import Modal from './components/Modal/Modal';
+import Alert from './components/Alert/Alert';
+import {Button} from './types/types';
+import "./App.css";
 
 const App = () => {
   const [showModal, setShowModal] = useState<boolean>(false);
@@ -8,10 +10,20 @@ const App = () => {
   const [showSecondAlert, setShowSecondAlert] = useState<boolean>(true);
   const [showThirdAlert] = useState<boolean>(true);
 
+  const buttons: Button[] = [
+    {type: 'primary', label: 'Continue', onClick: () => console.log('clicked continue')},
+    {type: 'danger', label: 'Close', onClick: () => setShowModal(false)}
+  ];
+
   return (
-    <div className="App container-xxl p-5">
-      <button type="button" className="btn btn-primary mb-3 mx-3" onClick={() => setShowModal(true)}>show Modal</button>
-      <Modal show={showModal} title="Some kinda modal title" onClose={() => setShowModal(false)}>
+    <div className="App container-xxl px-5 pb-5">
+      <button type="button" className="btn btn-primary mb-3" onClick={() => setShowModal(true)}>show Modal</button>
+      <Modal
+        show={showModal}
+        title="Some kinda modal title"
+        onClose={() => setShowModal(false)}
+        buttons={buttons}
+      >
         <div className="modal-body">
           <p>This is modal content</p>
         </div>
@@ -19,9 +31,11 @@ const App = () => {
       <Alert
         type="warning"
         show={showFirstAlert}
-        onDismiss={() => {setShowFirstAlert(false)}}
+        onDismiss={() => {
+          setShowFirstAlert(false);
+        }}
       >
-        This a warning alert
+        This is warning on dismiss alert!
       </Alert>
       <Alert
         type="success"
@@ -29,11 +43,9 @@ const App = () => {
         onDismiss={() => setShowSecondAlert(false)}
         clickDismissable
       >
-        This a success alert
+        This is success click dismissible alert!
       </Alert>
-      <Alert show={showThirdAlert} type="danger" >
-        This a danger alert
-      </Alert>
+      <Alert show={showThirdAlert} type="danger">This is don't closing danger alert!</Alert>
     </div>
   );
 };
