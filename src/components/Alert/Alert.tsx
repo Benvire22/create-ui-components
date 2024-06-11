@@ -1,20 +1,33 @@
 import React from 'react';
 
 interface Props extends React.PropsWithChildren {
+    show: boolean;
     type: string;
-    onDismiss?: React.MouseEventHandler | undefined;
+    onDismiss?: () => void | undefined;
+    clickDismissable?: boolean;
 }
 
-const Alert: React.FC<Props> = ({ type, onDismiss, children}) => {
+const Alert: React.FC<Props> = ({show, type, onDismiss, clickDismissable, children}) => {
+
+    const onClickDismissable = (): void => {
+      if (clickDismissable && onDismiss !== undefined) {
+          onDismiss();
+      }
+    };
+
     return (
         <div
-            className={`alert alert-${type} d-flex justify-content-between w-50`}
+            className={`alert alert-${type} w-50`}
             role="alert"
+            style={{display: show ? "block" : "none"}}
+            onClick={onClickDismissable}
         >
-            {children}
-            {onDismiss !== undefined ? (
-                    <button type="button" className=" btn-close" onClick={onDismiss} aria-label="Close"></button>
-            ) : null}
+            <div className="d-flex justify-content-between">
+                {children}
+                {onDismiss !== undefined && !clickDismissable ? (
+                  <button type="button" className="btn-close" onClick={onDismiss} aria-label="Close"></button>
+                ) : null}
+            </div>
         </div>
     );
 };
